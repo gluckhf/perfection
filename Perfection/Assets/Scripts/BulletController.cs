@@ -33,9 +33,11 @@ public class BulletController : MonoBehaviour
         {
             delayTimer_s = 0;
             targetPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            targetPoint.z = 0;
+            Vector3 directionVector = (targetPoint - spawnPoint.position).normalized;
+            Debug.Log("Spawning bullet targeting " + targetPoint.ToString() + " from " + spawnPoint.position + ", vector " + directionVector.ToString());
 
-            Vector3 directionVector = targetPoint - spawnPoint.position;
-            Vector3 spawnOffset = directionVector.normalized * spawnDistance;
+            Vector3 spawnOffset = directionVector * spawnDistance;
 
             var spawnedBullet = Instantiate(bullet, spawnPoint.position + spawnOffset, spawnPoint.rotation);
             spawnedBullet.GetComponent<Rigidbody2D>().AddForce(directionVector * bulletForce);
