@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2802879841165879342}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ae7880680052b4991103943db8019d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transform: {fileID: 9112314934217595543}
+  myTransform: {fileID: 9112314934217595543}
 --- !u!212 &3142099104667666527
 SpriteRenderer:
   m_ObjectHideFlags: 0

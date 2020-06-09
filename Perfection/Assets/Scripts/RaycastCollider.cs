@@ -5,7 +5,7 @@ using UnityEngine;
 public class RaycastCollider : MonoBehaviour
 {
     
-    public Transform transform;
+    public Transform myTransform;
 
     private Vector2 lastPosition;
 
@@ -18,7 +18,7 @@ public class RaycastCollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 thisPosition = transform.position;
+        Vector2 thisPosition = myTransform.position;
         Vector2 direction = thisPosition - lastPosition;
 
         RaycastHit2D hit = Physics2D.Raycast(lastPosition, direction.normalized, direction.magnitude);
@@ -27,8 +27,7 @@ public class RaycastCollider : MonoBehaviour
         if (hit && hit.collider.gameObject != this.gameObject)
         {
             // Move it back to where it collided
-            transform.position = hit.point;
-            Debug.Log("Raycast collision: " + hit.collider.name);
+            myTransform.position = hit.point;
         }
 
         lastPosition = thisPosition;
