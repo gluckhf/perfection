@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Despawner : MonoBehaviour
+public class PlateCollision : MonoBehaviour
 {
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Despawner collision with " + collision.gameObject.name);
-        Destroy(collision.gameObject);
+        Debug.Log("Plate collision with " + collision.gameObject.name);
+        Destroy(this.gameObject);
     }
 }
