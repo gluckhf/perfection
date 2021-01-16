@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     
     
     private bool Boosting = false;
-    private Vector3 BoostSpeed = new Vector3(0,0,0);
+    private Vector2 BoostSpeed = new Vector2(0,0);
 
     // Start is called before the first frame update
     void Start()
@@ -26,8 +26,23 @@ public class PlayerController : MonoBehaviour
     {
         Boost();
 
-        Vector3 velocity = BoostSpeed + new Vector3(Input.GetAxis(HorizontalAxis) * Speed, Input.GetAxis(VerticalAxis) * Speed, 0);
-        transform.position += velocity * Time.deltaTime;
+        Vector2 currentPosition = transform.position;
+        Vector2 velocity = Time.deltaTime * (BoostSpeed + new Vector2(Input.GetAxis(HorizontalAxis) * Speed, Input.GetAxis(VerticalAxis) * Speed));
+
+        // Raycast the movement to make sure the player doesn't clip through objects while moving quickly
+        RaycastHit2D hit = Physics2D.Raycast(currentPosition, velocity.normalized, velocity.magnitude);
+        Debug.DrawLine(currentPosition, currentPosition + velocity, Color.red, 0.2f, false);
+
+        if (hit && hit.collider.gameObject != this.gameObject)
+        {
+            // Move it to where it collided
+            transform.position = hit.point;
+        }
+        else
+        {
+            // Move the entire way
+            transform.position = currentPosition + velocity;
+        }
     }
 
     void Boost()
@@ -37,7 +52,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown(DashButton))
             {
                 Boosting = true;
-                BoostSpeed = new Vector3(Input.GetAxis(HorizontalAxis), Input.GetAxis(VerticalAxis), 0) * BoostSpeedMax;
+                BoostSpeed = new Vector2(Input.GetAxis(HorizontalAxis), Input.GetAxis(VerticalAxis)) * BoostSpeedMax;
             }
         }
         else

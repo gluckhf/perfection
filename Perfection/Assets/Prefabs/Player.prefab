@@ -48,6 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   BoostSpeedMax: 20
+  DashButton: J1_A
+  HorizontalAxis: J1_Horizontal
+  VerticalAxis: J1_Vertical
 --- !u!212 &505139219710443364
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -115,9 +118,9 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!58 &1243715368905345516
 CircleCollider2D:
@@ -134,4 +137,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.45
+  m_Radius: 0.5
