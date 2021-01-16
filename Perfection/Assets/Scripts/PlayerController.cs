@@ -7,8 +7,13 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D body;
     public float Speed;
     public float BoostSpeedMax;
-    protected bool Boosting = false;
-    protected Vector3 BoostSpeed = new Vector3(0,0,0);
+    public string DashButton = "J1_A";
+    public string HorizontalAxis = "J1_Horizontal";
+    public string VerticalAxis = "J1_Vertical";
+    
+    
+    private bool Boosting = false;
+    private Vector3 BoostSpeed = new Vector3(0,0,0);
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         Boost();
 
-        Vector3 velocity = BoostSpeed + new Vector3(Input.GetAxis("Horizontal") * Speed, Input.GetAxis("Vertical") * Speed, 0);
+        Vector3 velocity = BoostSpeed + new Vector3(Input.GetAxis(HorizontalAxis) * Speed, Input.GetAxis(VerticalAxis) * Speed, 0);
         transform.position += velocity * Time.deltaTime;
     }
 
@@ -29,10 +34,10 @@ public class PlayerController : MonoBehaviour
     {
         if (!Boosting)
         {
-            if (Input.GetButtonDown("A"))
+            if (Input.GetButtonDown(DashButton))
             {
                 Boosting = true;
-                BoostSpeed = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * BoostSpeedMax;
+                BoostSpeed = new Vector3(Input.GetAxis(HorizontalAxis), Input.GetAxis(VerticalAxis), 0) * BoostSpeedMax;
             }
         }
         else
