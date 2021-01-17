@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D body;
     public float Speed;
-    public float BoostSpeedMax;
+    public float BoostSpeedMultiplier;
     public string DashButton = "J1_A";
     public string HorizontalAxis = "J1_Horizontal";
     public string VerticalAxis = "J1_Vertical";
@@ -27,22 +27,8 @@ public class PlayerController : MonoBehaviour
         Boost();
 
         Vector2 currentPosition = transform.position;
-        Vector2 velocity = Time.deltaTime * (BoostSpeed + new Vector2(Input.GetAxis(HorizontalAxis) * Speed, Input.GetAxis(VerticalAxis) * Speed));
-
-        // Raycast the movement to make sure the player doesn't clip through objects while moving quickly
-        RaycastHit2D hit = Physics2D.Raycast(currentPosition, velocity.normalized, velocity.magnitude);
-        Debug.DrawLine(currentPosition, currentPosition + velocity, Color.red, 0.2f, false);
-
-        if (hit && hit.collider.gameObject != this.gameObject)
-        {
-            // Move it to where it collided
-            transform.position = hit.point;
-        }
-        else
-        {
-            // Move the entire way
-            transform.position = currentPosition + velocity;
-        }
+        body.AddForce(body.mass * Time.deltaTime * (BoostSpeed + new Vector2(Input.GetAxis(HorizontalAxis) * Speed, Input.GetAxis(VerticalAxis) * Speed)));
+        body.velocity /= 2;
     }
 
     void Boost()
@@ -52,13 +38,13 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown(DashButton))
             {
                 Boosting = true;
-                BoostSpeed = new Vector2(Input.GetAxis(HorizontalAxis), Input.GetAxis(VerticalAxis)) * BoostSpeedMax;
+                BoostSpeed = new Vector2(Input.GetAxis(HorizontalAxis), Input.GetAxis(VerticalAxis)) * BoostSpeedMultiplier * Speed;
             }
         }
         else
         {
             BoostSpeed *= (0.95f - Time.deltaTime);
-            if(BoostSpeed.magnitude < BoostSpeedMax/2)
+            if(BoostSpeed.magnitude < (BoostSpeedMultiplier * Speed )/ 2)
             {
                 BoostSpeed *= 0f;
                 Boosting = false;

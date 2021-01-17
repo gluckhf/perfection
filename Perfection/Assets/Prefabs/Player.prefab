@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ff053bc61061f4f81f77fcce8b77b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
-  BoostSpeedMax: 20
+  Speed: 5000
+  BoostSpeedMultiplier: 4
   DashButton: J1_A
   HorizontalAxis: J1_Horizontal
   VerticalAxis: J1_Vertical
