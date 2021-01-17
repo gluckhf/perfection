@@ -10,12 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 505139219710443365}
   - component: {fileID: -1754274964475309849}
+  - component: {fileID: 7134353390382792908}
   - component: {fileID: 505139219710443364}
   - component: {fileID: -1749565962636405142}
   - component: {fileID: 1243715368905345516}
+  - component: {fileID: -2100530220424698928}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,11 +48,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ff053bc61061f4f81f77fcce8b77b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5000
-  BoostSpeedMultiplier: 4
+  Speed: 4000
+  Torque: 3
+  BoostSpeedMultiplier: 3
   DashButton: J1_A
   HorizontalAxis: J1_Horizontal
   VerticalAxis: J1_Vertical
+  BodyAngle: 0
+  TargetAngle: 0
+  Diff: 0
+  Diff2: 0
+--- !u!114 &7134353390382792908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505139219710443290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5684c0259fd8a474989e2b2ad91b85c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InteractButton: J1_X
 --- !u!212 &505139219710443364
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -114,8 +134,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
   m_Mass: 0.6361725
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 15
+  m_AngularDrag: 30
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 2
@@ -138,3 +158,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!58 &-2100530220424698928
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505139219710443290}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.8
